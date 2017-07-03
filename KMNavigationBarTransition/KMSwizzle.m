@@ -26,6 +26,9 @@
 
 void KMSwizzleMethod(Class cls, SEL originalSelector, SEL swizzledSelector)
 {
+    if (NSProcessInfo.processInfo.operatingSystemVersion.majorVersion >= 11) {
+        return;
+    }
     Method originalMethod = class_getInstanceMethod(cls, originalSelector);
     Method swizzledMethod = class_getInstanceMethod(cls, swizzledSelector);
     
